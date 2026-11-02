@@ -146,7 +146,7 @@ function setLanguage(lang){
  document.querySelectorAll('[data-alt]').forEach(el=>{el.alt=tr(el.dataset.alt)});
  document.querySelectorAll('[data-aria]').forEach(el=>{el.setAttribute('aria-label',tr(el.dataset.aria))});
  document.querySelectorAll('[data-lang]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.lang===language)));
- document.title={en:'Ius Auto — auto body repair in Chișinău',ru:'Ius auto S.R.L — кузовной ремонт в Кишинёве',ro:'Ius auto S.R.L — reparații caroserie în Chișinău'}[language];
+ document.title={en:'Ius Auto (Ius auto S.R.L) — auto body repair and painting in Chișinău',ru:'Ius Auto (Ius auto S.R.L) — кузовной ремонт и покраска в Кишинёве',ro:'Ius Auto (Ius auto S.R.L) — reparații caroserie și vopsire în Chișinău'}[language];
  document.querySelector('meta[name=description]').content={en:'Auto body repair, dent removal, body geometry, painting and auto parts. Insurance repairs, 6-month warranty, over 23 years of experience. Ius Auto, Petricani 202, Chișinău.',ru:'Кузовной ремонт, рихтовка, восстановление геометрии кузова и покраска автомобилей. Работаем со страховыми, гарантия 6 месяцев, более 23 лет опыта. Ius auto S.R.L, Кишинёв, Petricani, 202.',ro:'Reparații caroserie, tinichigerie, geometrie și vopsire auto. Lucrăm cu asigurările, garanție 6 luni, peste 23 de ani de experiență. Ius auto S.R.L, Chișinău, Petricani, 202.'}[language];
  renderChips();updateContacts();updateStatus();formatCounters();
  document.dispatchEvent(new Event('ius-language-change'));

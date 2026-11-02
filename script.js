@@ -140,7 +140,9 @@ function renderChips(){
 }
 function setLanguage(lang){
  language=['ru','ro','en'].includes(lang)?lang:'ru';document.documentElement.lang=language;
- document.querySelectorAll('[data-i]').forEach(el=>{el.innerHTML=tr(el.dataset.i)});
+ // Only <br> and <em> are allowed as markup in translations; everything else is set as plain text.
+ const SAFE=v=>!/</.test(v.replace(/<\/?(br|em)>/g,''));
+ document.querySelectorAll('[data-i]').forEach(el=>{const v=tr(el.dataset.i);if(SAFE(v))el.innerHTML=v;else el.textContent=v});
  document.querySelectorAll('[data-alt]').forEach(el=>{el.alt=tr(el.dataset.alt)});
  document.querySelectorAll('[data-aria]').forEach(el=>{el.setAttribute('aria-label',tr(el.dataset.aria))});
  document.querySelectorAll('[data-lang]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.lang===language)));

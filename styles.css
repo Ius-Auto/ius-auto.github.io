@@ -474,3 +474,5 @@ footer{background:var(--green-deep);color:#fff;margin-top:40px;padding:64px 0 28
 }
 
 .process{margin-top:0}
+
+.sprite{position:absolute;width:0;height:0;overflow:hidden}

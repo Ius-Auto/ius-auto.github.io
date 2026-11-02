@@ -16,3 +16,14 @@
 Для Cloudflare Workers: `npm run build` собирает `site-worker.mjs` со всеми файлами.
 
 Иллюстративные фото покраски — Pexels.
+
+## Безопасность
+- Content-Security-Policy: скрипты, стили и шрифты загружаются только с самого сайта; разрешён лишь iframe Google Maps (в песочнице `sandbox`).
+- Шрифты Manrope и Unbounded хранятся локально в `fonts/` (лицензия SIL OFL), без запросов к Google Fonts.
+- Нет форм, баз данных и паролей; переводы вставляются только с разрешёнными тегами `<br>`/`<em>`.
+- Внешние ссылки открываются с `rel="noopener noreferrer"`; из фото удалены EXIF-метаданные (GPS и т. п.), номера машин размыты.
+- Для Cloudflare Worker дополнительно отдаются заголовки HSTS, X-Frame-Options, Permissions-Policy и др. (см. `worker.js`).
+
+## Поиск в Google
+`robots.txt`, `sitemap.xml`, canonical, Open Graph и разметка schema.org `AutoBodyShop` уже есть.
+При переходе на свой домен замените `https://fckda55.github.io/ius-auto/` в `index.html`, `robots.txt` и `sitemap.xml`.

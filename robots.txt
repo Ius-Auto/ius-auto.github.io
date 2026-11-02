@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fckda55.github.io/ius-auto/sitemap.xml

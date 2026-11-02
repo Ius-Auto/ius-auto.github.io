@@ -22,7 +22,7 @@ worker.js — простой сервер для Cloudflare Workers. build.mjs �
 
 Форма «Оценка сайта» и админка модерации убраны: сайт полностью статический.
 Безопасность: политика CSP, локальные шрифты (папка fonts/), без форм и баз данных, EXIF из фото удалён.
-Поиск: robots.txt, sitemap.xml, canonical и schema.org уже настроены под https://fckda55.github.io/ius-auto/ —
+Поиск: robots.txt, sitemap.xml, canonical и schema.org уже настроены под https://ius-auto.github.io/ —
 при своём домене замените этот адрес в index.html, robots.txt и sitemap.xml.
 Публикация: любой статический хостинг (GitHub Pages, Netlify, Cloudflare Pages) — просто файлы из папки.
 Или Cloudflare Worker: npm run build и загрузить site-worker.mjs.

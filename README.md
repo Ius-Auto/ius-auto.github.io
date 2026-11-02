@@ -9,7 +9,7 @@
 
 ## Запуск
 Сайт статический — откройте `index.html` или опубликуйте папку на любом статическом хостинге
-(GitHub Pages: Settings → Pages → Deploy from branch → `main` / root).
+— опубликован на https://ius-auto.github.io/
 
 Контакты меняются в `config.js`.
 
@@ -26,4 +26,4 @@
 
 ## Поиск в Google
 `robots.txt`, `sitemap.xml`, canonical, Open Graph и разметка schema.org `AutoBodyShop` уже есть.
-При переходе на свой домен замените `https://fckda55.github.io/ius-auto/` в `index.html`, `robots.txt` и `sitemap.xml`.
+При переходе на свой домен замените `https://ius-auto.github.io/` в `index.html`, `robots.txt` и `sitemap.xml`.

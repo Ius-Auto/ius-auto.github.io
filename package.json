@@ -3,6 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "pages": "node tools/pages.mjs",
+    "images": "node tools/images.mjs",
+    "preview": "node tools/preview.mjs",
     "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "linkedom": "^0.18.15",
+    "sharp": "^0.35.5"
   }
 }

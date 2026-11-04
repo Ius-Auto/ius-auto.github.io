@@ -1,101 +1,15 @@
 'use strict';
 document.documentElement.classList.add('js');
 
-/* ================= Translations ================= */
-const ro={
-skip:'La conținut',nav:'Navigare',menu:'Meniu',navServices:'Servicii',navProcess:'Cum lucrăm',navGallery:'Galerie',navFaq:'Întrebări',navContacts:'Contacte',call:'Sunați',
-eyebrow:'REPARAȚII CAROSERIE · CHIȘINĂU',headline:'Reparații caroserie.<br>Tinichigerie.<br><em>Vopsire.</em>',
-extraServices:'Reparații plastic · Potrivirea culorii vopselei · Piese auto la comandă',
-intro:'De la mici îndoituri la daune grave în urma accidentelor. Îndepărtarea îndoiturilor și vânzare de piese auto.',
-directions:'Cum ajungeți la noi',address:'Chișinău, str. Petricani, 202',heroAlt:'Automobil sport roșu într-un garaj luminos — fotografie ilustrativă',
-heroBadgeWarranty:'Garanție 2 ani',heroBadgeRating:'Google · 22 de recenzii',
-stat1:'ani de garanție pentru lucrări',stat2:'evaluare pe Google',stat3:'recenzii ale clienților pe Google',stat4:'zile pe săptămână lucrăm',
-servicesLabel:'01 / SERVICIILE NOASTRE',servicesTitle:'Reparații caroserie,<br>vopsire și piese auto',servicesIntro:'Reparăm daunele, restabilim geometria și vopsim. Stabilim lucrările necesare după examinarea automobilului.',
-s1:'Reparații caroserie',d1:'Reparăm caroseria, de la mici îndoituri la daune provocate de accidente grave.',
-s2:'Tinichigerie și îndepărtarea îndoiturilor',d2:'Restabilim forma elementelor de caroserie deteriorate.',
-s3:'Geometria caroseriei',d3:'Restabilim geometria caroseriei în urma deformărilor și accidentelor.',
-s4:'Vopsirea elementelor',d4:'Vopsim separat bare de protecție, portiere, aripi și alte elemente de caroserie.',
-s5:'Vopsire integrală',d5:'Pregătim și vopsim întregul automobil.',
-s6:'Vânzare și comandă de piese auto',d6:'Piese auto la comandă pentru automobilul dumneavoastră. Pentru disponibilitate, preț și condițiile comenzii, sunați-ne.',
-s7:'Reparații plastic',d7:'Reparăm piesele din plastic deteriorate ale automobilului.',
-s8:'Potrivirea culorii vopselei',d8:'Potrivim culoarea vopselei pentru caroserie și elementele individuale.',
-s9:'Cazuri de asigurare',d9:'Lucrăm cu companiile de asigurări. Sunați-ne — discutăm cazul dumneavoastră.',
-partsCall:'Întrebați despre piese →',priceTitle:'Cât costă reparația?',priceText:'Costul se stabilește după examinarea automobilului. Convenim asupra lucrărilor înainte de a începe reparația.',visit:'Adresa și programul →',
-galleryTitle:'Formă. Suprafață. Culoare.',bandText:'Redăm caroseriei forma corectă și culoarea curată.',
-processLabel:'02 / SIMPLU ȘI CLAR',processTitle:'De la examinare la rezultat.',
-step1:'Examinarea automobilului',step1p:'Evaluăm daunele și stabilim ce trebuie reparat.',
-step2:'Stabilirea lucrărilor',step2p:'Discutăm lucrările necesare și costul înainte de începerea reparației.',
-step3:'Reparație și vopsire',step3p:'Efectuăm lucrările convenite și oferim garanție de 2 ani.',
-promiseTitle:'Garanție de 2 ani pentru lucrările efectuate.',promiseText:'Ne asumăm răspunderea pentru reparațiile caroseriei. Automobilul poate rămâne la noi pe durata reparației.',
-galleryLabel:'03 / GALERIE',galleryHeading:'Mașini care<br>merită să strălucească.',galleryNote:'Fotografii ilustrative despre vopsire și automobile. Apăsați pentru a mări.',
-gA:'Automobil sport gri',gB:'Automobil sport portocaliu în garaj',g2:'Lucrul cu piesele',gC:'Automobil într-un garaj întunecat',gD:'Sedan negru în mișcare',gE:'Coupé gri pe fundal de munți',g3:'Automobil în atelier',gF:'Coupé roșu în natură',gG:'Sedan argintiu',gH:'Coupé negru, vedere din față',
-faqLabel:'04 / ÎNTREBĂRI FRECVENTE',faqTitle:'Pe scurt despre esențial.',
-q1:'Lucrați cu companiile de asigurări?',a1:'Da, lucrăm cu companiile de asigurări. Sunați-ne — discutăm cazul dumneavoastră.',
-q2:'Ce garanție oferiți?',a2:'Pentru lucrările efectuate oferim garanție de 2 ani.',
-q3:'Pot lăsa automobilul la dumneavoastră?',a3:'Da, automobilul poate rămâne la noi pe durata reparației.',
-q4:'Cât costă reparația?',a4:'Stabilim costul după examinarea automobilului și îl convenim cu dumneavoastră înainte de începerea lucrărilor.',
-q5:'Pot comanda piese auto la dumneavoastră?',a5:'Da, comandăm piese auto pentru automobilul dumneavoastră. Pentru disponibilitate, preț și condiții, sunați-ne.',
-q6:'Care este programul de lucru?',a6:'Luni — vineri de la 09:00 la 18:00, sâmbătă de la 09:00 la 15:00. Duminică — închis.',
-contactsLabel:'04 / VĂ AȘTEPTĂM',contactsTitle:'Ne găsiți pe Petricani, 202.',city:'Chișinău, Moldova',
-googleMaps:'Deschideți în Google Maps',waze:'Deschideți în Waze ↗',scheduleTitle:'Program de lucru',weekdays:'Luni — vineri',saturday:'Sâmbătă',sunday:'Duminică',closed:'Închis',scheduleNote:'Stabilim costul reparației după examinarea automobilului.',
-googleTitle:'Recenzii despre service pe Google',googleText:'Părerile clienților despre Ius Auto sunt disponibile pe pagina noastră Google.',googleLink:'Citiți recenziile pe Google ↗',
-googleCount:'22 de recenzii pe Google',googleSnapshot:'Evaluare la data de 1 noiembrie 2026. Recenziile de mai jos sunt în limba originală.',googleSelection:'O selecție de recenzii ale clienților de pe Google',googleExcerpt:'Fragment din recenzie',googleSource:'Sursa: Google ↗',
-feedbackLabel:'05 / PĂREREA DVS.',feedbackTitle:'Spuneți-ne părerea despre site-ul Ius Auto',feedbackLead:'Evaluați experiența de utilizare a acestei pagini',ratingLabel:'Evaluarea site-ului',nameLabel:'Numele dumneavoastră',commentLabel:'Ce credeți că ar trebui îmbunătățit?',moderationNote:'Numele, evaluarea și comentariul vor apărea pe site după aprobare. Nu includeți date personale de contact.',submitReview:'Trimiteți recenzia',reviewsTitle:'Recenzii despre site',adminLink:'Aprobarea recenziilor',
-footerText:'Reparații caroserie. Tinichigerie. Vopsire.',top:'Sus ↑',credit:'Fotografii ilustrative: Unsplash, Pexels',
-lbClose:'Închide',lbPrev:'Anterioara',lbNext:'Următoarea'
-};
-const en={
-skip:'Skip to content',nav:'Navigation',menu:'Menu',navServices:'Services',navProcess:'How we work',navGallery:'Gallery',navFaq:'FAQ',navContacts:'Contact',call:'Call us',
-eyebrow:'AUTO BODY REPAIR · CHIȘINĂU',headline:'Body repair.<br>Panel beating.<br><em>Painting.</em>',
-extraServices:'Plastic repair · Paint colour matching · Auto parts ordering',
-intro:'From small dents to serious collision damage. Dent removal and auto parts sales.',
-directions:'Get directions',address:'202 Petricani Street, Chișinău',heroAlt:'Red sports car in a bright garage — illustrative photo',
-heroBadgeWarranty:'2-year warranty',heroBadgeRating:'Google · 22 reviews',
-stat1:'year warranty on our work',stat2:'Google rating',stat3:'customer reviews on Google',stat4:'days a week we are open',
-servicesLabel:'01 / OUR SERVICES',servicesTitle:'Auto body repair,<br>painting and auto parts',servicesIntro:'We repair damage, restore body geometry and paint. We determine the work needed after inspecting your car.',
-s1:'Auto body repair',d1:'Repairing body damage, from small dents to the aftermath of serious collisions.',
-s2:'Panel beating and dent removal',d2:'Restoring the shape of damaged body panels.',
-s3:'Body geometry restoration',d3:'Restoring body geometry after deformation and collisions.',
-s4:'Panel painting',d4:'Painting individual bumpers, doors, wings and other body panels.',
-s5:'Full respray',d5:'Preparing and painting the entire vehicle.',
-s6:'Auto parts sales and ordering',d6:'Auto parts ordered for your vehicle. Call us for availability, prices and order details.',
-s7:'Plastic repair',d7:'We repair damaged plastic vehicle parts.',
-s8:'Paint colour matching',d8:'We match paint colours for the bodywork and individual panels.',
-s9:'Insurance repairs',d9:'We work with insurance companies. Give us a call and we will discuss your case.',
-partsCall:'Ask about parts →',priceTitle:'How much will repairs cost?',priceText:'The price is determined after inspecting your car. We agree on the work before repairs begin.',visit:'Address and opening hours →',
-galleryTitle:'Shape. Surface. Colour.',bandText:'We bring back clean lines and a flawless finish.',
-processLabel:'02 / SIMPLE AND CLEAR',processTitle:'From inspection to completion.',
-step1:'Vehicle inspection',step1p:'We assess the damage and determine what needs repairing.',
-step2:'Agreeing on the work',step2p:'We discuss the repairs and price before starting work.',
-step3:'Repair and painting',step3p:'We carry out the agreed work and give a 2-year warranty.',
-promiseTitle:'2-year warranty on completed work.',promiseText:'We stand behind our body repairs. You can leave your car with us for the duration of the repair.',
-galleryLabel:'03 / GALLERY',galleryHeading:'Cars that<br>deserve to shine.',galleryNote:'Illustrative photography of painting and cars. Tap to enlarge.',
-gA:'Grey sports car',gB:'Orange sports car in a garage',g2:'Working with panels',gC:'Car in a dark garage',gD:'Black saloon in motion',gE:'Grey coupé with mountains behind',g3:'A car in the workshop',gF:'Red coupé outdoors',gG:'Silver saloon',gH:'Black coupé, front view',
-faqLabel:'04 / FAQ',faqTitle:'The essentials, briefly.',
-q1:'Do you work with insurance companies?',a1:'Yes, we work with insurance companies. Give us a call and we will discuss your case.',
-q2:'What warranty do you give?',a2:'We give a 2-year warranty on completed work.',
-q3:'Can I leave my car with you?',a3:'Yes, you can leave your car with us for the duration of the repair.',
-q4:'How much does a repair cost?',a4:'We determine the price after inspecting the car and agree it with you before any work begins.',
-q5:'Can I order auto parts from you?',a5:'Yes, we order auto parts for your vehicle. Call us for availability, prices and terms.',
-q6:'What are your opening hours?',a6:'Monday to Friday 09:00–18:00, Saturday 09:00–15:00. Closed on Sunday.',
-contactsLabel:'04 / VISIT US',contactsTitle:'Find us at Petricani, 202.',city:'Chișinău, Moldova',
-googleMaps:'Open in Google Maps',waze:'Open in Waze ↗',scheduleTitle:'Opening hours',weekdays:'Monday — Friday',saturday:'Saturday',sunday:'Sunday',closed:'Closed',scheduleNote:'Repair prices are determined after inspecting the vehicle.',
-googleTitle:'Auto service reviews on Google',googleText:'Read what customers say about Ius Auto on our Google listing.',googleLink:'Read reviews on Google ↗',
-googleCount:'22 reviews on Google',googleSnapshot:'Rating as of 1 November 2026. Reviews below are shown in their original language.',googleSelection:'A selection of customer reviews from Google',googleExcerpt:'Review excerpt',googleSource:'Source: Google ↗',
-feedbackLabel:'05 / FEEDBACK',feedbackTitle:'Share your opinion of the Ius Auto website',feedbackLead:'Rate your experience with this page',ratingLabel:'Your website rating',nameLabel:'Your name',commentLabel:'What do you think we could improve?',moderationNote:'Your name, rating and comment will appear on the website after approval. Please do not include personal contact details.',submitReview:'Submit review',reviewsTitle:'Website reviews',adminLink:'Review moderation',
-footerText:'Auto body repair. Panel beating. Painting.',top:'Back to top ↑',credit:'Illustrative photos: Unsplash, Pexels',
-lbClose:'Close',lbPrev:'Previous',lbNext:'Next'
-};
-Object.assign(ro,{"extraServices": "Reparații plastic · Potrivirea culorii vopselei · Îndepărtarea îndoiturilor fără vopsire · Vânzare de piese auto", "heroAlt": "Vopsirea caroseriei cu pistolul de vopsit — fotografie ilustrativă", "heroBadgeWarranty": "Garanție 6 luni", "badgeYears": "ani de activitate", "pdr": "Îndepărtarea îndoiturilor fără vopsire", "stat1": "ani de experiență în reparații caroserie", "stat2": "garanție pentru lucrările efectuate", "stat3": "evaluare pe Google", "stat4": "recenzii ale clienților pe Google", "monthsShort": "luni", "step3p": "Efectuăm lucrările convenite și oferim garanție de 6 luni.", "promiseTitle": "Garanție de 6 luni pentru lucrările efectuate.", "promiseText": "De peste 23 de ani ne ocupăm de reparații caroserie și răspundem pentru rezultat. Automobilul poate rămâne la noi pe durata reparației.", "navResults": "Înainte / După", "resultsLabel": "03 / ÎNAINTE ȘI DUPĂ", "resultsTitle": "Lucrările noastre:<br>înainte și după reparație.", "resultsNote": "Automobile reale pe care le-am restabilit. Trageți cursorul pentru a compara. Numerele sunt ascunse.", "baBefore": "Înainte de reparație", "baAfter": "După", "baBeforeAlt": "Automobil înainte de reparație", "baAfterAlt": "Automobil după reparație", "baRange": "Comparați înainte și după", "credit": "Fotografiile „înainte și după” — lucrări Ius Auto. Fotografii ilustrative: Pexels"});
-Object.assign(en,{"extraServices": "Plastic repair · Paint colour matching · Paintless dent removal · Auto parts sales", "heroAlt": "Spray-painting a car body — illustrative photo", "heroBadgeWarranty": "6-month warranty", "badgeYears": "years in business", "pdr": "Paintless dent removal", "stat1": "years of auto body repair experience", "stat2": "warranty on completed work", "stat3": "Google rating", "stat4": "customer reviews on Google", "monthsShort": "months", "step3p": "We carry out the agreed work and give a 6-month warranty.", "promiseTitle": "6-month warranty on completed work.", "promiseText": "For over 23 years we have been repairing car bodies and standing behind the result. You can leave your car with us for the duration of the repair.", "navResults": "Before / After", "resultsLabel": "03 / BEFORE AND AFTER", "resultsTitle": "Our work:<br>before and after.", "resultsNote": "Real cars we have restored. Drag the slider to compare. Number plates are hidden.", "baBefore": "Before repair", "baAfter": "After", "baBeforeAlt": "Car before repair", "baAfterAlt": "Car after repair", "baRange": "Compare before and after", "credit": "Before-and-after photos: Ius Auto work. Illustrative photos: Pexels"});
-// Russian is read from the page itself.
-const ru={};
-document.querySelectorAll('[data-i]').forEach(el=>{if(!(el.dataset.i in ru))ru[el.dataset.i]=el.innerHTML});
-document.querySelectorAll('[data-alt]').forEach(el=>{ru[el.dataset.alt]=el.alt});
-document.querySelectorAll('[data-aria]').forEach(el=>{ru[el.dataset.aria]=el.getAttribute('aria-label')});
-const dict={ru,ro,en};
-let language='ru';
-const tr=key=>dict[language][key]??ru[key]??'';
+/* ================= Language =================
+   Texts for all three languages come from i18n.js (built by `npm run pages`).
+   Each language also has its own page for Google: / (ru), /ro/, /en/.
+   Switching happens in place, without reloading, and the address bar follows. */
+const I18N=window.IUS_I18N||{};
+const LANGS=['ru','ro','en'],LANG_PATH={ru:'/',ro:'/ro/',en:'/en/'};
+const PAGE_LANG=LANGS.includes(document.documentElement.lang)?document.documentElement.lang:'ru';
+let language=PAGE_LANG;
+const tr=key=>I18N[language]?.[key]??I18N.ru?.[key]??'';
 
 /* ================= Contacts ================= */
 const validNumber=v=>/^\+[1-9]\d{7,14}$/.test(v||'');
@@ -133,26 +47,43 @@ function updateStatus(){
  document.querySelectorAll('.schedule dl div').forEach(row=>row.classList.toggle('today',row.dataset.days.split(',').map(Number).includes(now.day)));
 }
 
-/* ================= Language ================= */
+/* ================= Language switching ================= */
 function renderChips(){
- const el=document.querySelector('.hero-chips');const parts=tr('extraServices').split('·').map(x=>x.trim()).filter(Boolean);
+ const el=document.querySelector('.hero-chips');const parts=(tr('extraServices')||el.textContent).split('·').map(x=>x.trim()).filter(Boolean);
  el.replaceChildren(...parts.map(t=>{const s=document.createElement('span');s.className='chip';s.textContent=t;return s}));
 }
-function setLanguage(lang){
- language=['ru','ro','en'].includes(lang)?lang:'ru';document.documentElement.lang=language;
- // Only <br> and <em> are allowed as markup in translations; everything else is set as plain text.
- const SAFE=v=>!/</.test(v.replace(/<\/?(br|em)>/g,''));
- document.querySelectorAll('[data-i]').forEach(el=>{const v=tr(el.dataset.i);if(SAFE(v))el.innerHTML=v;else el.textContent=v});
- document.querySelectorAll('[data-alt]').forEach(el=>{el.alt=tr(el.dataset.alt)});
- document.querySelectorAll('[data-aria]').forEach(el=>{el.setAttribute('aria-label',tr(el.dataset.aria))});
- document.querySelectorAll('[data-lang]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.lang===language)));
- document.title={en:'Ius Auto (Ius auto S.R.L) — auto body repair and painting in Chișinău',ru:'Ius Auto (Ius auto S.R.L) — кузовной ремонт и покраска в Кишинёве',ro:'Ius Auto (Ius auto S.R.L) — reparații caroserie și vopsire în Chișinău'}[language];
- document.querySelector('meta[name=description]').content={en:'Auto body repair, dent removal, body geometry, painting and auto parts. Insurance repairs, 6-month warranty, over 23 years of experience. Ius Auto, Petricani 202, Chișinău.',ru:'Кузовной ремонт, рихтовка, восстановление геометрии кузова и покраска автомобилей. Работаем со страховыми, гарантия 6 месяцев, более 23 лет опыта. Ius auto S.R.L, Кишинёв, Petricani, 202.',ro:'Reparații caroserie, tinichigerie, geometrie și vopsire auto. Lucrăm cu asigurările, garanție 6 luni, peste 23 de ani de experiență. Ius auto S.R.L, Chișinău, Petricani, 202.'}[language];
+const langBox=document.querySelector('.languages'),langPill=langBox?.querySelector('.lang-pill');
+const langLinks=[...document.querySelectorAll('[data-lang]')];
+function placePill(animate){
+ const a=langLinks.find(l=>l.dataset.lang===language);if(!a||!langPill)return;
+ langPill.style.setProperty('--x',a.offsetLeft+'px');langPill.style.setProperty('--w',a.offsetWidth+'px');
+ if(animate){langPill.classList.remove('stretch');void langPill.offsetWidth;langPill.classList.add('stretch')}
+}
+function setLanguage(lang,{animate=false,remember=true}={}){
+ if(!LANGS.includes(lang)||!I18N[lang])lang=language;
+ const changed=lang!==language;language=lang;document.documentElement.lang=language;
+ if(changed){
+  // Only <br> and <em> are allowed as markup in translations; everything else is set as plain text.
+  const SAFE=v=>!/</.test(v.replace(/<\/?(br|em)>/g,''));
+  document.querySelectorAll('[data-i]').forEach(el=>{const v=tr(el.dataset.i);if(!v)return;if(SAFE(v))el.innerHTML=v;else el.textContent=v});
+  document.querySelectorAll('[data-alt]').forEach(el=>{const v=tr(el.dataset.alt);if(v)el.alt=v});
+  document.querySelectorAll('[data-aria]').forEach(el=>{const v=tr(el.dataset.aria);if(v)el.setAttribute('aria-label',v)});
+  if(tr('metaTitle'))document.title=tr('metaTitle');
+  const desc=document.querySelector('meta[name=description]');if(desc&&tr('metaDescription'))desc.content=tr('metaDescription');
+  try{history.replaceState(history.state,'',LANG_PATH[language]+location.hash)}catch{}
+ }
+ langLinks.forEach(a=>a.setAttribute('aria-current',String(a.dataset.lang===language)));
+ placePill(animate&&changed);
  renderChips();updateContacts();updateStatus();formatCounters();
  document.dispatchEvent(new Event('ius-language-change'));
- try{localStorage.setItem('ius-language',language)}catch{}
+ if(remember)try{localStorage.setItem('ius-language',language)}catch{}
 }
-document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>setLanguage(b.dataset.lang)));
+langLinks.forEach(a=>a.addEventListener('click',e=>{
+ if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0||!I18N[a.dataset.lang])return; // let new-tab clicks work as normal links
+ e.preventDefault();setLanguage(a.dataset.lang,{animate:true});
+}));
+window.addEventListener('resize',()=>placePill(false));
+document.fonts?.ready.then(()=>placePill(false));
 
 /* ================= Counters ================= */
 const counters=[...document.querySelectorAll('.count')];
@@ -198,7 +129,7 @@ function onScroll(){
  }
  if(!reduced.matches){
   for(const el of parallax){
-   const r=el.parentElement.getBoundingClientRect();if(r.bottom<-200||r.top>vh+200)continue;
+   const host=el.parentElement.tagName==='PICTURE'?el.parentElement.parentElement:el.parentElement;const r=host.getBoundingClientRect();if(r.bottom<-200||r.top>vh+200)continue;
    const off=(r.top+r.height/2-vh/2)*Number(el.dataset.speed);el.style.translate=`0 ${off.toFixed(1)}px`;
   }
  }
@@ -257,7 +188,9 @@ if(!reduced.matches&&'IntersectionObserver' in window){
 }
 
 /* Init */
-let saved='ru';try{saved=localStorage.getItem('ius-language')||'ru'}catch{}
-setLanguage(saved);
+// The address decides the language (/ro/, /en/). Only on the main page a remembered choice is applied.
+let saved=null;try{saved=localStorage.getItem('ius-language')}catch{}
+setLanguage(PAGE_LANG==='ru'&&saved&&saved!=='ru'?saved:PAGE_LANG,{remember:false});
+requestAnimationFrame(()=>langBox?.classList.add('ready'));
 document.getElementById('year').textContent=new Date().getFullYear();
 onScroll();setInterval(updateStatus,60000);

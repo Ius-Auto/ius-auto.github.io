@@ -11,10 +11,11 @@ const SECURITY_HEADERS={
 export default {async fetch(request){
  const url=new URL(request.url),path=url.pathname;
  if(request.method!=='GET'&&request.method!=='HEAD')return new Response('Method not allowed',{status:405,headers:{allow:'GET, HEAD',...SECURITY_HEADERS}});
- const key=path==='/'?'/index.html':path;
+ if(!path.endsWith('/')&&ASSETS[path+'/index.html'])return Response.redirect(url.origin+path+'/'+url.search+url.hash,301);
+ const key=path.endsWith('/')?path+'index.html':path;
  const file=ASSETS[key];
  if(!file){const nf=ASSETS['/404.html'];return new Response(nf?Uint8Array.from(atob(nf.data),c=>c.charCodeAt(0)):'Not found',{status:404,headers:{'content-type':'text/html; charset=utf-8',...SECURITY_HEADERS}})}
  const bytes=Uint8Array.from(atob(file.data),c=>c.charCodeAt(0));
- const cache=/\.(jpg|png|svg|woff2)$/.test(key)?'public,max-age=604800':'no-cache';
+ const cache=/\.(jpg|png|webp|ico|svg|woff2)$/.test(key)?'public,max-age=604800':'no-cache';
  return new Response(request.method==='HEAD'?null:bytes,{headers:{'content-type':file.type,'cache-control':cache,...SECURITY_HEADERS}});
 }};

@@ -343,6 +343,8 @@ footer{background:var(--green-deep);color:#fff;margin-top:40px;padding:64px 0 28
  html{scroll-behavior:auto}
  *,*::before,*::after{animation:none!important;transition:none!important}
  .marquee-track{flex-wrap:wrap;width:auto;justify-content:center}
+ .marquee-track{padding-inline:28px;gap:14px 24px}
+ .marquee-track>:nth-child(n+17){display:none} /* the list is written twice only for the seamless loop; show it once when the animation is off */
 }
 
 /* ---------- Responsive ---------- */

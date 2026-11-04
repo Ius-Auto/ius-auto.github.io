@@ -365,7 +365,6 @@ footer{background:var(--green-deep);color:#fff;margin-top:40px;padding:64px 0 28
  .hero-visual{height:62vh;min-height:380px}
  .stats{grid-template-columns:1fr 1fr}
  .services{grid-template-columns:1fr 1fr}
- .services{grid-auto-flow:dense}.services>:last-child:not(.service-wide){grid-column:1/-1} /* 7 regular cards: the last one takes the full row */
  .service-wide,.service-card.price{grid-column:1/-1}
  .faq-grid{grid-template-columns:1fr;gap:20px}.faq-side{position:static}.faq-photo{display:none}
  .contacts{grid-template-columns:1fr}

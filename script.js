@@ -202,32 +202,13 @@ if(!reduced.matches&&'IntersectionObserver' in window){
  baItems.forEach(el=>bio.observe(el));
 }
 
-/* ================= Extra motion: cursor, magnetic buttons, tilt, scroll-reactive marquee ================= */
+/* ================= Extra motion: magnetic buttons, tilt, scroll-reactive marquee ================= */
 (()=>{
  if(reduced.matches)return;
  const marquee=document.querySelector('.marquee'),track=marquee?.querySelector('.marquee-track');
  const anim=()=>track?.getAnimations?.()[0];
  let lastY=window.scrollY,vel=0,dir=1;
- // Custom cursor: a dot plus a ring that trails behind, grows over links and stretches while the page scrolls.
- let dot=null,ring=null,hoverKind='';
- const pos={x:innerWidth/2,y:innerHeight/2},rp={x:pos.x,y:pos.y};
- function makeCursor(){
-  if(dot||!fine.matches)return;
-  dot=document.createElement('div');dot.className='cursor-dot';ring=document.createElement('div');ring.className='cursor-ring';
-  ring.innerHTML='<span>‹ ›</span>';dot.setAttribute('aria-hidden','true');ring.setAttribute('aria-hidden','true');
-  document.body.append(ring,dot);document.documentElement.classList.add('has-cursor');
- }
- fine.addEventListener?.('change',()=>{if(fine.matches)makeCursor()});makeCursor();
- document.addEventListener('pointermove',e=>{
-  if(e.pointerType!=='mouse')return;makeCursor();
-  pos.x=e.clientX;pos.y=e.clientY;mouse.x=e.clientX/innerWidth*2-1;mouse.y=e.clientY/innerHeight*2-1;
-  document.documentElement.classList.add('cursor-on');
-  const t=e.target.closest?.('.ba,a,button,input,label');
-  hoverKind=!t?'':t.classList.contains('ba')?'drag':'link';
- },{passive:true});
- document.addEventListener('pointerleave',()=>document.documentElement.classList.remove('cursor-on'));
- document.addEventListener('pointerdown',()=>ring?.classList.add('press'));
- document.addEventListener('pointerup',()=>ring?.classList.remove('press'));
+ document.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;mouse.x=e.clientX/innerWidth*2-1;mouse.y=e.clientY/innerHeight*2-1},{passive:true});
 
  // Magnetic buttons: they lean towards the cursor.
  document.addEventListener('pointermove',e=>{
@@ -262,13 +243,6 @@ if(!reduced.matches&&'IntersectionObserver' in window){
   if(fine.matches){
    applyParallax();
    if(heroVisual&&hero.getBoundingClientRect().bottom>0)heroVisual.style.transform=`perspective(1400px) rotateY(${(mouse.sx*5).toFixed(2)}deg) rotateX(${(-mouse.sy*4).toFixed(2)}deg)`;
-  }
-  if(ring){
-   rp.x+=(pos.x-rp.x)*.18;rp.y+=(pos.y-rp.y)*.18;
-   const stretch=Math.min(Math.abs(vel)*.025,.8),scale=hoverKind==='drag'?2.1:hoverKind==='link'?1.6:1;
-   ring.style.transform=`translate3d(${rp.x}px,${rp.y}px,0) translate(-50%,-50%) scale(${(scale*(1-stretch*.35)).toFixed(3)},${(scale*(1+stretch)).toFixed(3)})`;
-   ring.dataset.kind=hoverKind;
-   dot.style.transform=`translate3d(${pos.x}px,${pos.y}px,0) translate(-50%,-50%)`;
   }
   requestAnimationFrame(loop);
  }

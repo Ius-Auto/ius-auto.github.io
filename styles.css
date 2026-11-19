@@ -516,16 +516,4 @@ footer{background:var(--green-deep);color:#fff;margin-top:40px;padding:64px 0 28
  /* steps lift when their turn comes on scroll */
  .steps article .step-num{transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
  .steps article.on .step-num{transform:scale(1.12) rotate(-6deg)}
- /* custom cursor */
- .cursor-dot,.cursor-ring{position:fixed;left:0;top:0;z-index:200;pointer-events:none;opacity:0;transition:opacity .3s}
- .cursor-on .cursor-dot,.cursor-on .cursor-ring{opacity:1}
- .cursor-dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
- .cursor-ring{width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(33,91,64,.55);display:grid;place-items:center;
-  transition:opacity .3s,background .3s,border-color .3s;will-change:transform}
- .cursor-ring span{font:800 8px/1 var(--font);letter-spacing:1px;color:var(--green);opacity:0;transition:opacity .2s}
- .cursor-ring[data-kind=link]{background:rgba(198,242,107,.22);border-color:transparent}
- .cursor-ring[data-kind=drag]{background:rgba(255,255,255,.85);border-color:transparent;box-shadow:0 6px 20px rgba(0,0,0,.18)}
- .cursor-ring[data-kind=drag] span{opacity:1}
- .cursor-ring.press{border-width:3px}
 }
-@media (hover:none),(pointer:coarse){.cursor-dot,.cursor-ring{display:none}}

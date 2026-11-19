@@ -487,3 +487,45 @@ footer{background:var(--green-deep);color:#fff;margin-top:40px;padding:64px 0 28
 .process{margin-top:0}
 
 .sprite{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ---------- Layout after the November edits ---------- */
+.services{grid-template-columns:1fr}
+.service-card.price{grid-column:1/-1}
+
+/* ---------- Extra motion (desktop mouse + no reduced motion) ---------- */
+@media (prefers-reduced-motion:no-preference){
+ /* headings come in out of a soft blur, eyebrow lines draw themselves */
+ .js h2.reveal{filter:blur(10px);transition:opacity .8s var(--ease) var(--d,0ms),transform 1s var(--ease) var(--d,0ms),filter 1s var(--ease) var(--d,0ms)}
+ .js h2.reveal.in{filter:none}
+ .js .eyebrow.reveal::before{transform:scaleX(0);transform-origin:left;transition:transform .9s var(--ease) calc(var(--d,0ms) + .25s)}
+ .js .eyebrow.reveal.in::before{transform:none}
+ /* marquee leans with the scroll */
+ .marquee-track>span{display:inline-block;transform:skewX(var(--skew,0deg));transition:transform .2s linear}
+ /* before/after photos zoom out as they scroll in */
+ .ba .ba-img{scale:calc(1.12 - .12 * var(--k,1));transition:scale .2s linear}
+ .ba:hover .ba-img{scale:1.03}
+ /* buttons follow the cursor (translate is separate from the hover transform) */
+ .button,.header-call{transition:transform .25s var(--ease),box-shadow .25s ease,background .25s ease,translate .45s var(--ease)}
+ .button.magnet-on,.header-call.magnet-on{transition:transform .25s var(--ease),box-shadow .25s ease,background .25s ease,translate .12s linear}
+ /* 3D tilt with a light sheen */
+ .tilt{transform-style:preserve-3d;transition:transform .6s var(--ease)}
+ .js .reveal.in.tilt,.tilt{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+ .tilt.tilting{transition:transform .12s linear}
+ .tilt.tilting{background-image:radial-gradient(420px circle at var(--gx,50%) var(--gy,50%),rgba(198,242,107,.18),transparent 65%)}
+ .hero-visual{transition:transform .2s linear;will-change:transform}
+ /* steps lift when their turn comes on scroll */
+ .steps article .step-num{transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
+ .steps article.on .step-num{transform:scale(1.12) rotate(-6deg)}
+ /* custom cursor */
+ .cursor-dot,.cursor-ring{position:fixed;left:0;top:0;z-index:200;pointer-events:none;opacity:0;transition:opacity .3s}
+ .cursor-on .cursor-dot,.cursor-on .cursor-ring{opacity:1}
+ .cursor-dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+ .cursor-ring{width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(33,91,64,.55);display:grid;place-items:center;
+  transition:opacity .3s,background .3s,border-color .3s;will-change:transform}
+ .cursor-ring span{font:800 8px/1 var(--font);letter-spacing:1px;color:var(--green);opacity:0;transition:opacity .2s}
+ .cursor-ring[data-kind=link]{background:rgba(198,242,107,.22);border-color:transparent}
+ .cursor-ring[data-kind=drag]{background:rgba(255,255,255,.85);border-color:transparent;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+ .cursor-ring[data-kind=drag] span{opacity:1}
+ .cursor-ring.press{border-width:3px}
+}
+@media (hover:none),(pointer:coarse){.cursor-dot,.cursor-ring{display:none}}

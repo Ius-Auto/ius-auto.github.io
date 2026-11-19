@@ -115,6 +115,25 @@ if(!reduced.matches&&'IntersectionObserver' in window){
 }
 
 /* Scroll-driven: progress bar, header, parallax, process line */
+// Mouse position, -1…1 from the centre of the window (stays 0 on touch screens).
+const mouse={x:0,y:0,sx:0,sy:0};
+function applyParallax(){
+ const vh=window.innerHeight;
+ for(const el of parallax){
+  const host=el.parentElement.tagName==='PICTURE'?el.parentElement.parentElement:el.parentElement;const r=host.getBoundingClientRect();if(r.bottom<-200||r.top>vh+200)continue;
+  const sp=Number(el.dataset.speed),off=(r.top+r.height/2-vh/2)*sp;
+  // Badges (negative speed) drift with the mouse a little more than the photo, which gives depth.
+  const depth=sp<0?26:-10;
+  el.style.translate=`${(mouse.sx*depth).toFixed(1)}px ${(off+mouse.sy*depth).toFixed(1)}px`;
+ }
+}
+// Before/after photos zoom out slightly as they scroll into the middle of the screen.
+const zoomItems=[...document.querySelectorAll('.ba')];
+function scrollZoom(vh){
+ if(reduced.matches)return;
+ for(const el of zoomItems){const r=el.getBoundingClientRect();if(r.bottom<0||r.top>vh)continue;
+  const k=Math.min(Math.max(1-(r.top+r.height/2-vh/2)/(vh*.8),0),1);el.style.setProperty('--k',k.toFixed(3))}
+}
 const mobileBar=document.querySelector('.mobile-bar'),header=document.querySelector('.site-header'),bar=document.querySelector('.scroll-progress');
 const parallax=[...document.querySelectorAll('[data-speed]')];
 const steps=document.querySelector('.steps'),stepItems=steps?[...steps.querySelectorAll('article')]:[];
@@ -127,12 +146,8 @@ function onScroll(){
  if(pendingCurtains.length){
   pendingCurtains=pendingCurtains.filter(el=>{const r=el.getBoundingClientRect();if(r.top<vh*.92&&r.bottom>0){el.classList.add('in');setTimeout(()=>el.style.removeProperty('--d'),1900);return false}return true});
  }
- if(!reduced.matches){
-  for(const el of parallax){
-   const host=el.parentElement.tagName==='PICTURE'?el.parentElement.parentElement:el.parentElement;const r=host.getBoundingClientRect();if(r.bottom<-200||r.top>vh+200)continue;
-   const off=(r.top+r.height/2-vh/2)*Number(el.dataset.speed);el.style.translate=`0 ${off.toFixed(1)}px`;
-  }
- }
+ if(!reduced.matches)applyParallax();
+ scrollZoom(vh);
  if(steps){
   const r=steps.getBoundingClientRect(),p=Math.min(Math.max((vh*.75-r.top)/(r.height),0),1);
   steps.style.setProperty('--line',p.toFixed(3));
@@ -186,6 +201,79 @@ if(!reduced.matches&&'IntersectionObserver' in window){
  }),{threshold:.5});
  baItems.forEach(el=>bio.observe(el));
 }
+
+/* ================= Extra motion: cursor, magnetic buttons, tilt, scroll-reactive marquee ================= */
+(()=>{
+ if(reduced.matches)return;
+ const marquee=document.querySelector('.marquee'),track=marquee?.querySelector('.marquee-track');
+ const anim=()=>track?.getAnimations?.()[0];
+ let lastY=window.scrollY,vel=0,dir=1;
+ // Custom cursor: a dot plus a ring that trails behind, grows over links and stretches while the page scrolls.
+ let dot=null,ring=null,hoverKind='';
+ const pos={x:innerWidth/2,y:innerHeight/2},rp={x:pos.x,y:pos.y};
+ function makeCursor(){
+  if(dot||!fine.matches)return;
+  dot=document.createElement('div');dot.className='cursor-dot';ring=document.createElement('div');ring.className='cursor-ring';
+  ring.innerHTML='<span>‹ ›</span>';dot.setAttribute('aria-hidden','true');ring.setAttribute('aria-hidden','true');
+  document.body.append(ring,dot);document.documentElement.classList.add('has-cursor');
+ }
+ fine.addEventListener?.('change',()=>{if(fine.matches)makeCursor()});makeCursor();
+ document.addEventListener('pointermove',e=>{
+  if(e.pointerType!=='mouse')return;makeCursor();
+  pos.x=e.clientX;pos.y=e.clientY;mouse.x=e.clientX/innerWidth*2-1;mouse.y=e.clientY/innerHeight*2-1;
+  document.documentElement.classList.add('cursor-on');
+  const t=e.target.closest?.('.ba,a,button,input,label');
+  hoverKind=!t?'':t.classList.contains('ba')?'drag':'link';
+ },{passive:true});
+ document.addEventListener('pointerleave',()=>document.documentElement.classList.remove('cursor-on'));
+ document.addEventListener('pointerdown',()=>ring?.classList.add('press'));
+ document.addEventListener('pointerup',()=>ring?.classList.remove('press'));
+
+ // Magnetic buttons: they lean towards the cursor.
+ document.addEventListener('pointermove',e=>{
+  if(!fine.matches)return;
+  document.querySelectorAll('.magnet-on').forEach(b=>{if(!b.contains(e.target)){b.classList.remove('magnet-on');b.style.translate=''}});
+  const b=e.target.closest?.('.button,.header-call');if(!b||b.closest('.mobile-bar'))return;
+  const r=b.getBoundingClientRect();b.classList.add('magnet-on');
+  b.style.translate=`${((e.clientX-r.left-r.width/2)*.22).toFixed(1)}px ${((e.clientY-r.top-r.height/2)*.3).toFixed(1)}px`;
+ },{passive:true});
+
+ // 3D tilt on cards.
+ const tiltSel='.service-card.price,.steps article,.schedule,.promise-card,.contact-card';
+ document.addEventListener('pointermove',e=>{
+  if(!fine.matches)return;
+  document.querySelectorAll('.tilting').forEach(c=>{if(!c.contains(e.target)){c.classList.remove('tilting');c.style.removeProperty('--rx');c.style.removeProperty('--ry')}});
+  const c=e.target.closest?.(tiltSel);if(!c)return;
+  const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+  c.classList.add('tilt','tilting');c.style.setProperty('--rx',(-y*7).toFixed(2)+'deg');c.style.setProperty('--ry',(x*9).toFixed(2)+'deg');
+  c.style.setProperty('--gx',((x+.5)*100).toFixed(1)+'%');c.style.setProperty('--gy',((y+.5)*100).toFixed(1)+'%');
+ },{passive:true});
+
+ const hero=document.querySelector('.hero'),heroVisual=document.querySelector('.hero-visual');
+ function loop(){
+  // scroll velocity, smoothed
+  const y=window.scrollY,dy=y-lastY;lastY=y;vel+=(dy-vel)*.18;
+  if(Math.abs(vel)>.4)dir=vel>0?1:-1;
+  // marquee: speeds up with scrolling, runs backwards when scrolling up, leans in the direction of travel
+  const a=anim();if(a){const speed=1+Math.min(Math.abs(vel)*.12,5);a.playbackRate=dir*speed}
+  marquee?.style.setProperty('--skew',Math.max(-12,Math.min(12,-vel*.35)).toFixed(2)+'deg');
+  // smoothed mouse for parallax and hero tilt
+  mouse.sx+=(mouse.x-mouse.sx)*.08;mouse.sy+=(mouse.y-mouse.sy)*.08;
+  if(fine.matches){
+   applyParallax();
+   if(heroVisual&&hero.getBoundingClientRect().bottom>0)heroVisual.style.transform=`perspective(1400px) rotateY(${(mouse.sx*5).toFixed(2)}deg) rotateX(${(-mouse.sy*4).toFixed(2)}deg)`;
+  }
+  if(ring){
+   rp.x+=(pos.x-rp.x)*.18;rp.y+=(pos.y-rp.y)*.18;
+   const stretch=Math.min(Math.abs(vel)*.025,.8),scale=hoverKind==='drag'?2.1:hoverKind==='link'?1.6:1;
+   ring.style.transform=`translate3d(${rp.x}px,${rp.y}px,0) translate(-50%,-50%) scale(${(scale*(1-stretch*.35)).toFixed(3)},${(scale*(1+stretch)).toFixed(3)})`;
+   ring.dataset.kind=hoverKind;
+   dot.style.transform=`translate3d(${pos.x}px,${pos.y}px,0) translate(-50%,-50%)`;
+  }
+  requestAnimationFrame(loop);
+ }
+ requestAnimationFrame(loop);
+})();
 
 /* Init */
 // The address decides the language (/ro/, /en/). Only on the main page a remembered choice is applied.

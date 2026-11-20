@@ -9,7 +9,7 @@ import {fileURLToPath} from 'node:url';
 import {parseHTML} from 'linkedom';
 import {ro, en} from '../translations.mjs';
 
-const SITE = 'https://ius-auto.github.io';
+const SITE = 'https://iusauto.md';
 const PATH = {ru: '/', ro: '/ro/', en: '/en/'};
 const LOCALE = {ru: 'ru_MD', ro: 'ro_MD', en: 'en_US'};
 const file = f => fileURLToPath(new URL('../' + f, import.meta.url));

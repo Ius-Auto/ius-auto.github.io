@@ -25,7 +25,7 @@
 2. `npm run preview` → откройте http://localhost:4173
    (пути на сайте идут от корня — `/styles.css`, поэтому двойной щелчок по `index.html` не подойдёт).
 
-Сайт опубликован на https://ius-auto.github.io/ — это просто файлы из папки (GitHub Pages).
+Сайт опубликован на https://iusauto.md/ — это просто файлы из папки (GitHub Pages).
 Контакты меняются в `config.js`.
 Для Cloudflare Workers: `npm run build` собирает `site-worker.mjs` со всеми файлами.
 
@@ -38,4 +38,4 @@
 
 ## Поиск в Google
 `robots.txt`, `sitemap.xml`, canonical, Open Graph и разметка schema.org `AutoBodyShop` уже есть.
-При переходе на свой домен замените `https://ius-auto.github.io/` в `index.html`, `robots.txt` и `sitemap.xml`.
+Домен iusauto.md подключён (файл `CNAME`, DNS у TopHost). Старый адрес ius-auto.github.io перенаправляет на него. Чтобы сменить домен, поменяйте `SITE` в `tools/pages.mjs` и адрес в `index.html` и `robots.txt`, затем выполните `npm run pages`.
